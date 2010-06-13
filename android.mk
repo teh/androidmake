@@ -1,6 +1,7 @@
-APP = ship2
-NS = com.binarycloud.ship2
-SDK = /home/tom/src/android-sdk-linux_86
+# Expects the following parameters before inclusion:
+#APP = ship2
+#NS = com.binarycloud.ship2
+#SDK = /home/tom/src/android-sdk-linux_86
 
 VERSION = 1.6
 MANIFEST = AndroidManifest.xml
@@ -19,7 +20,7 @@ clean:
 
 gen/scalamake.mk:
 	mkdir -p gen
-	python dependencies.py > gen/scalamake.mk
+	python androidmake/dependencies.py $(PWD) > gen/scalamake.mk
 
 include gen/scalamake.mk
 
