@@ -1,9 +1,15 @@
 import re
 import os
+import sys
+
+try:
+    directory = sys.argv[1]
+except IndexError:
+    directory = '.'
 
 interest = [
     os.path.join(root, f)
-    for root, dirs, files in os.walk('.')
+    for root, dirs, files in os.walk(directory)
     for f in files
     if f.endswith('.scala')
 ]
