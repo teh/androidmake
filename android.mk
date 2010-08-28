@@ -57,3 +57,9 @@ install: debug
 
 uninstall:
 	adb -d uninstall $(NS)
+
+installemu: debug
+	adb -e install -r gen/$(APP).apk
+
+uninstallemu:
+	adb -e uninstall $(NS)
