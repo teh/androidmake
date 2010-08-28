@@ -36,22 +36,10 @@ for def_path, names in class_names:
                     continue
                 appear_in[appear_path].add(class_map[name])
 
-# 2) Topological sort
-# see e.g. http://en.wikipedia.org/wiki/Topological_sorting
-build_order = []
-no_incoming = set(path for path, incoming in appear_in.iteritems() if incoming == set())
-while no_incoming:
-    n = no_incoming.pop()
-    build_order.append(n)
-    for path, incoming in appear_in.iteritems():
-        # Store vertex if it transitions from has-element to empty
-        if n in incoming:
-            incoming.discard(n)
-            if incoming == set():
-                no_incoming.add(path)
-
 path_map = dict((path, names) for path, names in class_names)
-for path in build_order:
-    names = path_map[path]
-    print "%s: %s" % (" ".join("gen/$(PACKAGE_PATH)/%s.class" % n for n in names), path)
+for path, names in class_names:
+    class_dependencies = " ".join(
+        "gen/$(PACKAGE_PATH)/%s.class" % name for path2 in appear_in[path] for name in path_map[path2]
+    )
+    print "%s: %s %s" % (" ".join("gen/$(PACKAGE_PATH)/%s.class" % n for n in names), path, class_dependencies)
     print "\t	scalac -classpath $(CLASSPATH) $< -d gen"
