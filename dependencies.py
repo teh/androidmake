@@ -42,4 +42,4 @@ for path, names in class_names:
         "gen/$(PACKAGE_PATH)/%s.class" % name for path2 in appear_in[path] for name in path_map[path2]
     )
     print "%s: %s %s" % (" ".join("gen/$(PACKAGE_PATH)/%s.class" % n for n in names), path, class_dependencies)
-    print "\t	scalac -classpath $(CLASSPATH) $< -d gen"
+    print "\t	fsc -classpath $(CLASSPATH) $< -d gen"
