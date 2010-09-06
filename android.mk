@@ -24,7 +24,7 @@ gen/scalamake.mk:
 
 include gen/scalamake.mk
 
-gen/$(PACKAGE_PATH)/R.java: res/layout res/values
+gen/$(PACKAGE_PATH)/R.java: res/layout/* res/values/* res/raw/* $(MANIFEST)
 	mkdir -p gen
 	$(AAPT) package -f -M $(MANIFEST) -F $(RESOURCE_FILE) -I $(ANDROID_JAR) -S res -m -J gen
 
