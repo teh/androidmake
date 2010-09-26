@@ -3,7 +3,6 @@
 #NS = com.binarycloud.ship2
 #SDK = /home/tom/src/android-sdk-linux_86
 
-VERSION = 1.6
 MANIFEST = AndroidManifest.xml
 ANDROID_JAR = $(SDK)/platforms/android-$(VERSION)/android.jar
 RESOURCE_FILE = gen/resources
