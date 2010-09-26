@@ -26,7 +26,7 @@ gen/$(PACKAGE_PATH)/R.java: res/layout/* res/values/* res/raw/* $(MANIFEST)
 gen/$(PACKAGE_PATH)/R.class: gen/$(PACKAGE_PATH)/R.java
 	javac -classpath $(CLASSPATH) gen/$(PACKAGE_PATH)/R.java
 
-gen/min.jar: gen/$(PACKAGE_PATH)/R.class $(addprefix gen/$(PACKAGE_PATH)/, $(CLASSES))
+gen/min.jar: gen/$(PACKAGE_PATH)/R.class src/$(PACKAGE_PATH)/*scala
 	fsc -classpath $(CLASSPATH) -optimise -d gen src/$(PACKAGE_PATH)/*scala
 	rm -f gen/min.jar
 	proguard -injars ./gen\(\!min.jar\):/usr/share/java/scala-library.jar\
