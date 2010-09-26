@@ -18,11 +18,6 @@ default: debug
 clean:
 	rm -rf gen
 
-gen/scalamake.mk:
-	mkdir -p gen
-	python androidmake/dependencies.py $(PWD) > gen/scalamake.mk
-
-include gen/scalamake.mk
 
 gen/$(PACKAGE_PATH)/R.java: res/layout/* res/values/* res/raw/* $(MANIFEST)
 	mkdir -p gen
@@ -32,6 +27,7 @@ gen/$(PACKAGE_PATH)/R.class: gen/$(PACKAGE_PATH)/R.java
 	javac -classpath $(CLASSPATH) gen/$(PACKAGE_PATH)/R.java
 
 gen/min.jar: gen/$(PACKAGE_PATH)/R.class $(addprefix gen/$(PACKAGE_PATH)/, $(CLASSES))
+	fsc -classpath $(CLASSPATH) -optimise -d gen src/$(PACKAGE_PATH)/*scala
 	rm -f gen/min.jar
 	proguard -injars ./gen\(\!min.jar\):/usr/share/java/scala-library.jar\
 	         -outjars gen/min.jar\
