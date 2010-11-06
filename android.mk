@@ -27,14 +27,14 @@ gen/$(PACKAGE_PATH)/R.class: gen/$(PACKAGE_PATH)/R.java
 	javac -classpath $(CLASSPATH) gen/$(PACKAGE_PATH)/R.java
 
 gen/min.jar: gen/$(PACKAGE_PATH)/R.class src/$(PACKAGE_PATH)/*scala
-	fsc -classpath $(CLASSPATH) -optimise -d gen src/$(PACKAGE_PATH)/*scala
+	$(FSC) -classpath $(CLASSPATH) -optimise -deprecation -d gen src/$(PACKAGE_PATH)/*scala
 	rm -f gen/min.jar
-	proguard -injars ./gen\(\!min.jar\):/usr/share/java/scala-library.jar\
-	         -outjars gen/min.jar\
-	         -libraryjars $(ANDROID_JAR)\
-                 -dontoptimize\
-	         -dontobfuscate\
-                 -keep "public class * extends android.app.Activity"\
+	proguard -injars ./gen\(\!min.jar\):/home/tom/src/scala-2.8.0.final/lib/scala-library.jar \
+	         -outjars gen/min.jar \
+	         -libraryjars $(ANDROID_JAR) \
+                 -dontoptimize \
+	         -dontobfuscate \
+                 -keep "public class * extends android.app.Activity" \
                  -dontwarn
 
 gen/classes.dex: gen/min.jar
