@@ -6,7 +6,8 @@
 MANIFEST = AndroidManifest.xml
 ANDROID_JAR = $(SDK)/platforms/android-$(VERSION)/android.jar
 RESOURCE_FILE = gen/resources
-CLASSPATH = $(ANDROID_JAR):.:/usr/share/java/scala-library.jar
+CLASSPATH = $(ANDROID_JAR):.:/home/tom/src/scala-2.8.0.final/lib/scala-library.jar:gen
+FSC = /home/tom/src/scala-2.8.0.final/bin/fsc
 
 AAPT = $(SDK)/platforms/android-$(VERSION)/tools/aapt
 DEX = $(SDK)/platforms/android-$(VERSION)/tools/dx
