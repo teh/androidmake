@@ -44,7 +44,7 @@ gen/$(APP).ap_: gen/classes.dex $(RESOURCE_FILE)
 	$(APKBUILDER) gen/$(APP).ap_ -u -z $(RESOURCE_FILE) -f gen/classes.dex
 
 gen/$(APP).apk: gen/$(APP).ap_
-	jarsigner -signedjar gen/$(APP).apk -storepass ketyer gen/$(APP).ap_ mykey
+	jarsigner -signedjar gen/$(APP).apk -storepass "android" -keystore debug.keystore gen/$(APP).ap_ androiddebugkey
 
 debug: gen/$(APP).apk
 
