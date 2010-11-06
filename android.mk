@@ -59,3 +59,7 @@ installemu: debug
 
 uninstallemu:
 	adb -e uninstall $(NS)
+
+debugkey:
+	keytool -genkey -keypass android -keystore debug.keystore -alias androiddebugkey -storepass android \
+            -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
